@@ -14,8 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+#from rest_framework import routers
+#from blog import views
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+# = routers.DefaultRouter()
+#router.register(r'tests', views.postViewSet)
+
+urlpatterns = [ #IP주소
+    path('admin/', admin.site.urls), #IP주소/admin/
+    path('shop/', include('shop.urls')),
+    path('', include('single_pages.urls')),
+    #path('accounts/', include('allauth.urls'))
+    #FBV스타일post_list 페이지만들기>url들>blog views
+    #path('drf/', include(router.urls))
+
 ]
+
+#urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
