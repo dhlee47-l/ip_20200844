@@ -1,3 +1,41 @@
 @font-face {
     font-family: 'Cozy', sans-serif;
     }
+
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+   background-color:#006a4e;
+}
+.content {
+   flex: 1;
+}
+
+/*flow.html */
+.flow-text {
+    display: flex;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: 1s;
+    font-size: 0.86rem;
+    font-weight:bold;
+    color: #fff;
+    background-color: #006a4e;
+}
+.flow-wrap {
+    animation: textLoop 10s linear infinite;
+    padding-right: 1vw;
+}
+
+@keyframes textLoop {
+    0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+    100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    }
+}

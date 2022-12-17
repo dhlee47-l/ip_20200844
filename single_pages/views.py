@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from shop.models import Post
+
 
 # Create your views here.
 def landing(request):
@@ -13,3 +14,5 @@ def about_me(request):
 
 def mypage(request):
     return render(request, 'single_pages/mypage.html')
+
+

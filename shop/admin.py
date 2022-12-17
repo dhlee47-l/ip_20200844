@@ -1,20 +1,28 @@
 from django.contrib import admin
-from .models import Post, Category, Company, Tag
+from .models import Post, Category, Company, Tag, Comment
 
 # Register your models here.
 admin.site.register(Post)
 
-class CateogryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug' : ('name',)}
+admin.site.register(Comment)
 
-admin.site.register(Category, CateogryAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+
+
+admin.site.register(Category, CategoryAdmin)
+
 
 class CompanyAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug' : ('name',)}
+    prepopulated_fields = {'slug': ('name',)}
+
 
 admin.site.register(Company, CompanyAdmin)
 
+
 class TagAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug' : ('name',)}
+    prepopulated_fields = {'slug': ('name',)}
+
 
 admin.site.register(Tag, TagAdmin)

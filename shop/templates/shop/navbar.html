@@ -1,19 +1,112 @@
-<!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">상품목록</a></li>
-                        <!--only authenticated:show mypage-->
-                        <li class="nav-item"><a class="nav-link" href="#!">Mypage</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About Us</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                        <!-- 로그인: 구글계정, 이메일로 로그인, 이메일로 회원가입-->
-                    </ul>
+{% load static %}
+{% load socialaccount %}
+
+
+<nav class="navbar navbar-expand-lg" style="background-color:#fff">
+    <div class="container">
+        <a class="navbar-brand" href="#!"><img src="/static/single_pages/css/title.png"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-="page" style="color:#5da452; font-size:0.94rem;" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#000000; font-size:0.94rem;" href="shop/post_list/">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#000000; font-size:0.94rem;" href="/about_me/">About Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#000000; font-size:0.94rem;" href="{% url 'mypage' %}">Mypage</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                       role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" style="color:black">
+                        {% if user.socialaccount_set.all.0.get_avatar_url %}
+                        <img class="rounded-circle mr-3" src="{{user.socialaccount_set.all.0.get_avatar_url}}" width="20px"/>
+                        {% else %}
+                        <img class="rounded-circle mr-1" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" width="25px"/>
+                        {% endif %}
+                        {{user.username}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/accounts/logout">LogOut</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal" style="color:black">LogIn</a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <div class="card-body">
+                <div class="input-group">
+                    <input id="search-input" class="form-control" type="text" placeholder="크리스마스 세일을 놓치지 마세요!"
+                           aria-label="Enter search term..." aria-describedby="button-search"/>
+                    <button class="btn btn-outline-success" id="button-search" type="button" onclick="searchPost()">Search</button>
                 </div>
             </div>
-        </nav>
 
+                            <script>
+                                function searchPost(){
+                                    let searchValue = document.getElementById('search-input').value.trim();
+                                    if(searchValue.length > 1){
+                                        location.href= "/shop/search/" + searchValue +"/";
+                                    }
+                                    else{
+                                        alert('('+ searchValue +') 두 글자 이상의 검색어를 입력해주세요.');
+                                    }
+                                };
+
+                                document.getElementById('search-input').addEventListener('keyup', function(event){
+                                    if(event.key === 'Enter'){
+                                        searchPost();
+                                    }
+                                });
+                            </script>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">LogIn</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6">
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm"
+                 href="{% provider_login_url 'google' %}">
+                    <i class="fa-brands fa-google"></i> LogIn with Google
+                </a>
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="/accounts/login/">
+                    <i class="fa-regular fa-envelope"></i> LogIn with Email
+                </a>
+              </div>
+              <div class="col-6">
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="/accounts/signup/">
+                    <i class="fa-regular fa-envelope"></i> SignUp with Email
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+</div>

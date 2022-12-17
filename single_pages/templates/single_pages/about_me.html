@@ -1,10 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COZY FUZZY COMPANY</title>
+  <link href="{% static 'single_pages/bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
+  <link href="{% static 'single_pages/css/customstyles.css' %}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/3385a22710.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
+{% include 'shop/navbar.html' %}
+
+<style>
+    *{
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .about_text{
+        font-weight:bold;
+        text-align:right;
+        margin-right:3rem;
+        margin-bottom:3rem;
+        font-size:0.8rem;
+        line-height:2rem;
+    }
+
+    .about_title{
+        font-weight:bold;
+        font-size:3rem;
+        line-height:1.4;
+    }
+</style>
+
+{% include 'shop/flow.html' %}
+
+  <div class="container" style="background-color:white">
+    <div class="row">
+      <div class="col-5"><Br><Br><br>
+        <span class="about-image"><img src="/static/single_pages/css/about.png"
+                                              style="width:26rem;height:26rem;"></span><Br><Br><br>
+      </div>
+      <div class="col-7"><br><br><br>
+        <br><h1 class="about_title">색다른<br>취미를 전하는 <br>감성기업</h1><br>
+
+        <div class="card col-4" data-toggle="modal" data-target="#portfolio1">
+          <div class="card-body">
+            <h5>HISTORY</h5>
+            <p style="font-size:0.75rem">작가님별 작품 수 통계</p>
+          </div>
+        </div>
+        <h6 class="about_text text-muted">Cozy Fuzzy는 뜨개질을 좋아하는 고객에게<br> 색다른 즐거움을 선물함으로써 그들의 일상이<br> 따뜻하고 행복한 경험으로 채워지기를 꿈꿉니다.</h6>
+
+      </div>
+    </div>
+
+  </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="portfolio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">HISTORY 통계자료</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="col-12">
+                  <div class="card-img-top" id="mychart1" style="width:12rem; height:12rem;"></div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          google.charts.load('current',{'packages':['bar']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart(){
+            var data = google.visualization.arrayToDataTable([
+              ['Craftsman','뜨개구리','Yarn','Cloth','기타'],
+              ['마이동풍', 3, 0, 0, 3],
+              ['우물안', 2, 2, 2, 0],
+              ['콩쥐', 3, 0, 3, 0],
+              ['올챙이', 1, 1, 1, 0]
+            ]);
+            var options = {
+              chart: {
+               }
+            };
+            var chart = new google.charts.Bar(document.getElementById('mychart1'));
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+          }
+        </script>
+
+        {% include 'shop/flow.html' %}
+        {% include 'shop/footer.html' %}
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
 </body>
+
+
 </html>
