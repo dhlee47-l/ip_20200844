@@ -31,19 +31,19 @@
             <div class="card-body" style="text-align:left;">
 
                 {% if user.is_authenticated %}
-
-                    <h6 style="color: #000; font-weight: bold; font-size: 1.7em;">
-                        "{{user.username}}"님 마이페이지
-                    </h6>
-                    <h6 class="text-muted" style="font-size: 0.89em; padding-bottom: 15px;">
-                        이메일: {{user.email}}
-                    </h6>
+                    <Br><Br>
+                    <h6 style="color: #000; font-weight: bold; font-size: 1.9em;">
+                        <a style="color: #006a4e; font-weight: bold; font-size: 1em;">"{{user.username}}"</a>님 마이페이지
+                    </h6><br>
+                    <h6 class="text-muted" style="font-size: 0.89em; padding-bottom: 15px; padding-left:10px">
+                        E-mail: {{user.email}}
+                    </h6><br><Br>
 
                     <hr>
                 <div class="row">
                     <div class="card col-7">
                         <div class="card-header" style="background-color:white">
-                            <h5 class="text-muted" style="font-weight:bold">댓글내역</h5>
+                            <h5 class="text-muted" style="font-weight:bold;margin-bottom:0">댓글내역</h5>
                         </div>
                         <div class="card-body" style="padding:0">
                                 <table class="table table-striped">
@@ -62,7 +62,7 @@
 
                     <div class="card col-3 " style="margin-left:2rem">
                         <div class="card-header" style="background-color:white">
-                            <h5 class="text-muted" style="font-weight:bold">좋아요 내역</h5>
+                            <h5 class="text-muted" style="font-weight:bold; margin-bottom:0">좋아요</h5>
                         </div>
                         <div class="card-body">
                             <div class="container">

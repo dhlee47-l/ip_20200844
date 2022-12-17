@@ -72,11 +72,7 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     scrap = models.ManyToManyField(User, blank=True, related_name='scrap_name')
 
-
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
-    # def __str__(self):
-    #     return f'[{self.pk}]{self.title}::{self.author}'
 
     def get_absolute_url(self):
         return f'/shop/{self.pk}/'
