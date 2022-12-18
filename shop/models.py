@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from markdownx.models import MarkdownxField
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -16,13 +17,13 @@ class Tag(models.Model):
 #다대일 관계
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+    slug1 = models.SlugField(max_length=200, unique=True, allow_unicode=True)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return f'/shop/category/{self.slug}/'
+        return f'/shop/category/{self.slug1}/'
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -56,8 +57,8 @@ class Post(models.Model):
     title = models.CharField(max_length=30)
     #간단한 설명
     hook_text = models.CharField(max_length=100, blank=True)
-    content = models.TextField()
-    #content = MarkdownxField()
+    #content = models.TextField()
+    content = MarkdownxField()
     #상품 이미지
     image = models.ImageField(upload_to='shop/images/%Y/%m/%d/', blank=True)
     #상품 가격
@@ -83,6 +84,9 @@ class Post(models.Model):
          else:
              return 'https://dummyimage.com/50x50/ced4da/6c757d.jpg'
 
+    def get_content_markdown(self):
+        return markdown(self.content)
+
 
 class Comment(models.Model):
         post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -102,3 +106,19 @@ class Comment(models.Model):
                 return self.author.socialaccount_set.first().get_avatar_url()
             else:
                 return 'https://dummyimage.com/50x50/ced4da/6c757d.jpg'
+
+
+# class reComment(models.Model):
+#     comment=models.ForeignKey(Comment,on_delete=models.CASCADE)
+#     body=models.CharField('대댓글',max_length=150)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#     def __str__(self):
+#         return self.body
+#
+#
+# class ReCommentForm(forms.ModelForm):
+#
+#     class Meta:
+#         model=reComment
+#         fields=('body','comment')

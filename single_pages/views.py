@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from shop.models import Post
+from django.shortcuts import render #redirect
+from shop.models import Post #Comment
 
 
 # Create your views here.
@@ -14,5 +14,11 @@ def about_me(request):
 
 def mypage(request):
     return render(request, 'single_pages/mypage.html')
+
+# def comments(response, comments):
+#     comments = Comment.comments.objects.all(pk=comments)
+#     return render(response,'single_pages/mypage.html',{'comments':comments})
+
+
 
 

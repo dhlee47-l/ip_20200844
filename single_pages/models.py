@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+from shop.models import Comment
+
+
 # Create your models here.
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, name, password=None):
@@ -33,6 +36,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=30, null=False, unique=True)
     name = models.CharField(max_length=15, null=False)
     is_admin = models.BooleanField(default=False)
+    #comments = models.ForeignKey(Comment, null=True, on_delete=models.CASCADE)
 
     objects = CustomUserManager()
 
@@ -50,5 +54,7 @@ class User(AbstractBaseUser):
 
     def is_staff(self):
        return self.is_admin
+
+
 
 

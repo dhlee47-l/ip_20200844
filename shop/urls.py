@@ -9,7 +9,7 @@ urlpatterns=[#IP주소/blog/
     path('<int:pk>/', views.PostDetail.as_view(), name="post_detail"),
     path('update_post/<int:pk>/', views.PostUpdate.as_view()),
     path('create_post/', views.PostCreate.as_view()),
-    path('category/<str:slug>/', views.category_page),
+    path('category/<str:slug1>/', views.category_page),
     path('company/<str:slug>/', views.company_page),#IP주소/blog/category/slug
     path('tag/<str:slug>/', views.tag_page),
     path('search/<str:q>/', views.PostSearch.as_view()),

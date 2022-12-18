@@ -27,7 +27,7 @@ urlpatterns = [ #IP주소
     path('admin/', admin.site.urls), #IP주소/admin/
     path('shop/', include('shop.urls')),
     path('', include('single_pages.urls')),
-    #path('markdownx/', include('markdownx.urls')),
+    path('markdownx/', include('markdownx.urls')),
     path('accounts/', include('allauth.urls'))
     #FBV스타일post_list 페이지만들기>url들>blog views
     #path('drf/', include(router.urls))

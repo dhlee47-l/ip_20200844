@@ -50,7 +50,11 @@
                                   <thead>
                                     <tr>
                                       <th scope="col" style="padding-left:1.2rem;">상품정보</th>
-                                      <th scope="col">내용</th>
+                                      <th scope="col">댓글
+<!--                                          {% for comment in request.user.comments_set.all %}-->
+<!--                                            {{ comment.comments }}-->
+<!--                                          {% endfor %}-->
+                                      </th>
                                     </tr>
                                   </thead>
                                   <tbody>

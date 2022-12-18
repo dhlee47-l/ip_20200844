@@ -105,8 +105,6 @@
 
         <div class="col-md-7 col-lg-8" style="background-color:white">
             <br>
-            <!--Post content-->
-            <div id="post-area">
                 <!-- Post header -->
                 <header class="mb-4">
                     <br>
@@ -200,7 +198,7 @@
 
                 <hr style="margin-right:2rem; margin-left:2rem"><br>
                 <div style="margin-left:2rem; font-size:0.79rem;">
-                {{ post.content|linebreaksbr}}
+                {{ post.get_content_markdown|truncatewords_html:400 |safe}}
                 </div>
                 <hr style="margin-right:2rem; margin-left:2rem">
 
@@ -285,7 +283,7 @@
                                                         {{comment.author.username}}
                                                         <small class="text_muted">{{comment.created_at}}</small>
                                                     </div>
-                                                    <p>{{comment.content | linebreaks}}</p>
+                                                    <p style="margin-bottom:0">{{comment.content | linebreaks}}</p>
                                                     {% if comment.created_at != comment.modified_at %}
                                                         <p class="text-muted float-right">
                                                             <small>Updated : {{comment.modified_at}}</small>
@@ -293,14 +291,13 @@
                                                     {% endif %}
 
                                             </div>
-                                    </div><hr>
+                                    </div><hr style="margin-top:0">
                                     {% endfor %}
                                     {% endif %}
 
                             </div>
                         </div>
                     </div>
-            </div>
         </div>
     </div>
 

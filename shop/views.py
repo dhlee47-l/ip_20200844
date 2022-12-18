@@ -10,16 +10,14 @@ from django.db.models import Q
 
 
 
-class PostUpdate(LoginRequiredMixin, UpdateView):
+class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title', 'hook_text', 'content', 'image', 'price', 'product_code', 'company', 'category']
     template_name = 'shop/post_update_form.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
-        else:
-            raise PermissionDenied
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.is_staff
+
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PostUpdate, self).get_context_data()
@@ -195,12 +193,12 @@ def scrap_list(request):
 
 
 
-def category_page(request, slug):
-    if slug == 'no_category':
+def category_page(request, slug1):
+    if slug1 == 'no_category':
         category = '미분류'
         post_list = Post.objects.filter(category=None)
     else:
-        category = Category.objects.get(slug=slug)
+        category = Category.objects.get(slug1=slug1)
         post_list = Post.objects.filter(category=category)
     return render(request, 'shop/post_list.html', {
                     'category': category,
