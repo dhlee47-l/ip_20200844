@@ -204,7 +204,9 @@ def category_page(request, slug1):
                     'category': category,
                     'post_list': post_list,
                     'categories': Category.objects.all(),
-                    'no_category_post_count': Post.objects.filter(category=None).count
+                    'no_category_post_count': Post.objects.filter(category=None).count,
+                    'companies': Company.objects.all(),
+                    'no_company_post_count': Post.objects.filter(company=None).count
     })
 
 
@@ -219,7 +221,9 @@ def company_page(request, slug):
                     'company': company,
                     'post_list': post_list,
                     'companies': Company.objects.all(),
-                    'no_company_post_count': Post.objects.filter(company=None).count
+                    'no_company_post_count': Post.objects.filter(company=None).count,
+                    'categories': Category.objects.all(),
+                    'no_category_post_count': Post.objects.filter(category=None).count
     })
 
 
